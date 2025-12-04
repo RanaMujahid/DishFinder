@@ -1,0 +1,40 @@
+# Build outputs
+bin/
+obj/
+
+# Database snapshots
+db.sqlite*
+
+# Visual Studio
+.vs/
+
+# Rider
+.idea/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# ASP.NET generated secrets
+**/appsettings.Development.json
+
+# Uploads
+uploads/
+
+# Coverage
+coverage/
+
+# Docker artifacts
+*.pid
+
+# Backup files
+*~
