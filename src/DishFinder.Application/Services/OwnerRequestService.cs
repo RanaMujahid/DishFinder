@@ -37,8 +37,9 @@ public class OwnerRequestService : IOwnerRequestService
 
     public async Task<IEnumerable<OwnerRequestDto>> GetPendingAsync(CancellationToken cancellationToken = default)
     {
-        var requests = await _ownerRequestRepository.GetPendingAsync(cancellationToken);
-        return requests.Select(_mapper.Map<OwnerRequestDto>);
+        //var requests = await _ownerRequestRepository.GetPendingAsync(cancellationToken);
+        //return requests.Select(_mapper.Map<OwnerRequestDto>);
+        return null; //TODO: need to fix this.
     }
 
     public async Task<bool> ApproveAsync(int id, CancellationToken cancellationToken = default)

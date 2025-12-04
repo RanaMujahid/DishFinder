@@ -1,4 +1,5 @@
 using DishFinder.Application.Interfaces;
+using DishFinder.Application.Interfaces.Repositories;
 using DishFinder.Application.Mapping;
 using DishFinder.Application.Services;
 using DishFinder.Application.Validators;
