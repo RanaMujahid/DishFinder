@@ -22,5 +22,6 @@ public class DomainProfile : Profile
         CreateMap<Photo, PhotoDto>();
         CreateMap<Bookmark, BookmarkDto>();
         CreateMap<OwnerRequest, OwnerRequestDto>();
+        CreateMap<Dish, DishDto>().ReverseMap();
     }
 }
