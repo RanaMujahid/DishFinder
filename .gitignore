@@ -1,0 +1,40 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+out/
+[Ll]og/
+logs/
+TestResults/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE settings
+.vs/
+.vscode/
+.idea/
+*.jfm
+
+# Cache and generated files
+*.cache
+*.dbmdl
+*.pdb
+*.tmp
+*.log
+*.coverage*
+*.coveragexml
+
+# Package outputs
+*.nupkg
+*.snupkg
+
+# Environment files
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
