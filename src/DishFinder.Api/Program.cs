@@ -44,6 +44,13 @@ builder.Services.AddScoped<IOwnerRequestService, OwnerRequestService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
 builder.Services.AddSingleton<IPasswordHasher<DishFinder.Domain.Entities.User>, PasswordHasher<DishFinder.Domain.Entities.User>>();
 
+builder.Services.AddCors(cors => cors.AddDefaultPolicy(policy => 
+    policy.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowAnyOrigin()
+    .WithExposedHeaders("Content-Disposition")));
+
+
 builder.Services.AddAutoMapper(typeof(DomainProfile));
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
 builder.Services.AddFluentValidationAutoValidation();
@@ -80,7 +87,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 

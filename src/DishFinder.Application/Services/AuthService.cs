@@ -27,26 +27,34 @@ public class AuthService : IAuthService
 
     public async Task<AuthResponseDto> RegisterAsync(RegisterUserDto dto, CancellationToken cancellationToken = default)
     {
-        var existing = await _users.GetByEmailAsync(dto.Email, cancellationToken);
-        if (existing != null)
+        try
         {
-            throw new InvalidOperationException("Email already registered");
+            var existing = await _users.GetByEmailAsync(dto.Email, cancellationToken);
+            if (existing != null)
+            {
+                throw new InvalidOperationException("Email already registered");
+            }
+
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Name = dto.Name,
+                Email = dto.Email,
+                Role = UserRole.User,
+                CreatedAt = DateTime.UtcNow
+            };
+            user.PasswordHash = _hasher.HashPassword(user, dto.Password);
+
+            await _users.AddAsync(user, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return await GenerateTokensAsync(user, cancellationToken);
+
         }
-
-        var user = new User
+        catch (Exception ex)
         {
-            Id = Guid.NewGuid(),
-            Name = dto.Name,
-            Email = dto.Email,
-            Role = UserRole.User,
-            CreatedAt = DateTime.UtcNow
-        };
-        user.PasswordHash = _hasher.HashPassword(user, dto.Password);
-
-        await _users.AddAsync(user, cancellationToken);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return await GenerateTokensAsync(user, cancellationToken);
+            throw;
+        }
     }
 
     public async Task<AuthResponseDto> LoginAsync(LoginDto dto, CancellationToken cancellationToken = default)
