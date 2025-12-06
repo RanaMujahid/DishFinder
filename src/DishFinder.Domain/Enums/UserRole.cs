@@ -2,7 +2,7 @@ namespace DishFinder.Domain.Enums;
 
 public enum UserRole
 {
-    User = 0,
+    Admin = 0,
     Owner = 1,
-    Admin = 2
+    User = 2
 }
