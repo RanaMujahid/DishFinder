@@ -29,6 +29,11 @@ public class RestaurantRepository : IRestaurantRepository
     public Task<Restaurant?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         => _db.Restaurants.Include(r => r.MenuItems).FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
 
+    public async Task<IEnumerable<Restaurant>> GetByOwnerAsync(Guid ownerId, CancellationToken cancellationToken = default)
+        => await _db.Restaurants
+            .Where(r => r.OwnerUserId == ownerId)
+            .ToListAsync(cancellationToken);
+
     public Task UpdateAsync(Restaurant restaurant, CancellationToken cancellationToken = default)
     {
         _db.Restaurants.Update(restaurant);

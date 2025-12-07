@@ -40,6 +40,12 @@ builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddScoped<IBookmarkService, BookmarkService>();
 builder.Services.AddScoped<IOwnerRequestService, OwnerRequestService>();
+builder.Services.AddScoped<IAdminReviewService, AdminReviewService>();
+builder.Services.AddScoped<IAdminPhotoService, AdminPhotoService>();
+builder.Services.AddScoped<IAdminOwnerRequestService, AdminOwnerRequestService>();
+builder.Services.AddScoped<IOwnerRestaurantService, OwnerRestaurantService>();
+builder.Services.AddScoped<IOwnerMenuService, OwnerMenuService>();
+builder.Services.AddScoped<IOwnerReviewService, OwnerReviewService>();
 
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
 builder.Services.AddSingleton<IPasswordHasher<DishFinder.Domain.Entities.User>, PasswordHasher<DishFinder.Domain.Entities.User>>();

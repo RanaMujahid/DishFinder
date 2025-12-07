@@ -10,7 +10,7 @@ public class Photo
     public bool IsApproved { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    //public Review? Review { get; set; }
-    //public Restaurant? Restaurant { get; set; }
-    //public Dish? Dish { get; set; }
+    public Review? Review { get; set; }
+    public Restaurant? Restaurant { get; set; }
+    public Dish? Dish { get; set; }
 }
