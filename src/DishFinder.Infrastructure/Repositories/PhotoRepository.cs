@@ -24,9 +24,23 @@ public class PhotoRepository : IPhotoRepository
     public async Task<IEnumerable<Photo>> GetForRestaurantAsync(int restaurantId, CancellationToken cancellationToken = default)
         => await _db.Photos.Where(p => p.RestaurantId == restaurantId).ToListAsync(cancellationToken);
 
+    public async Task<IEnumerable<Photo>> GetPendingAsync(CancellationToken cancellationToken = default)
+        => await _db.Photos
+            .Include(p => p.Restaurant)
+            .Include(p => p.Review)
+            .Include(p => p.Dish)
+            .Where(p => !p.IsApproved)
+            .ToListAsync(cancellationToken);
+
     public Task UpdateAsync(Photo photo, CancellationToken cancellationToken = default)
     {
         _db.Photos.Update(photo);
+        return Task.CompletedTask;
+    }
+
+    public Task DeleteAsync(Photo photo, CancellationToken cancellationToken = default)
+    {
+        _db.Photos.Remove(photo);
         return Task.CompletedTask;
     }
 }
