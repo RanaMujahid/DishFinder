@@ -2,12 +2,16 @@ namespace DishFinder.Application.DTOs.Restaurants;
 
 public class RestaurantDto
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public string Address { get; set; } = string.Empty;
-    public int AreaId { get; set; }
-    public bool IsVerified { get; set; }
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
+    public string Id { get; set; } = "";
+    public string Name { get; set; } = "";
+    public string Image { get; set; } = "";
+    public double Rating { get; set; }
+    public int ReviewCount { get; set; }
+    public string Category { get; set; } = "";
+    public string Area { get; set; } = "";
+    public string Distance { get; set; } = "";
+    public string PriceRange { get; set; } = "";
+    public bool IsOpen { get; set; }
+    public string OpeningHours { get; set; } = "";
+    public string SignatureDish { get; set; } = "";
 }

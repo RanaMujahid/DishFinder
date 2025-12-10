@@ -16,6 +16,14 @@ public class RestaurantsController : ControllerBase
         _restaurantService = restaurantService;
     }
 
+    [HttpGet("featured")]
+    public async Task<IActionResult> Featured(CancellationToken cancellationToken)
+    {
+        var restaurants = await _restaurantService.GetFeaturedAsync(cancellationToken);
+        return restaurants == null ? NotFound() : Ok(restaurants);
+
+    }
+
     [HttpGet("{id:int}")]
     public async Task<ActionResult<RestaurantDto>> GetById(int id, CancellationToken cancellationToken)
     {
