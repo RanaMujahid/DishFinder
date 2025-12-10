@@ -1,3 +1,4 @@
+using DishFinder.Api.Middlewares;
 using DishFinder.Application.Interfaces;
 using DishFinder.Application.Interfaces.Repositories;
 using DishFinder.Application.Mapping;
@@ -20,6 +21,7 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
@@ -43,6 +45,7 @@ builder.Services.AddScoped<IOwnerRequestService, OwnerRequestService>();
 builder.Services.AddScoped<IAdminReviewService, AdminReviewService>();
 builder.Services.AddScoped<IAdminPhotoService, AdminPhotoService>();
 builder.Services.AddScoped<IAdminOwnerRequestService, AdminOwnerRequestService>();
+builder.Services.AddScoped<IAdminDashboardService, AdminDahsboardService>();
 builder.Services.AddScoped<IOwnerRestaurantService, OwnerRestaurantService>();
 builder.Services.AddScoped<IOwnerMenuService, OwnerMenuService>();
 builder.Services.AddScoped<IOwnerReviewService, OwnerReviewService>();
@@ -79,6 +82,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
@@ -94,6 +98,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors();
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 

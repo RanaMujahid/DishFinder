@@ -1,6 +1,7 @@
 using DishFinder.Application.DTOs.Reviews;
 using DishFinder.Application.Interfaces;
 using DishFinder.Application.Interfaces.Repositories;
+using System.Security.Cryptography.Xml;
 
 namespace DishFinder.Application.Services;
 
@@ -17,25 +18,41 @@ public class AdminReviewService : IAdminReviewService
 
     public async Task<IEnumerable<PendingReviewDto>> GetPendingAsync(CancellationToken cancellationToken = default)
     {
-        var reviews = await _reviewRepository.GetPendingAsync(cancellationToken);
 
-        return reviews.Select(r => new PendingReviewDto
+        return new List<PendingReviewDto>()
         {
-            Id = r.Id,
-            UserId = r.UserId,
-            UserName = r.User?.Name ?? string.Empty,
-            RestaurantId = r.RestaurantId,
-            RestaurantName = r.Restaurant?.Name ?? string.Empty,
-            DishId = r.DishId,
-            DishName = r.Dish?.Name ?? string.Empty,
-            Comment = r.Comment,
-            RatingTaste = r.RatingTaste,
-            RatingPortion = r.RatingPortion,
-            RatingValue = r.RatingValue,
-            IsApproved = r.IsApproved,
-            IsFlagged = r.IsFlagged,
-            CreatedAt = r.CreatedAt
-        });
+            new PendingReviewDto
+                    {
+                        Id = 1,
+                        UserId = Guid.NewGuid(),
+                        UserName = string.Empty,
+                        RestaurantId = 1,
+                        RestaurantName = "Test",
+                        Comment = "This is good",
+                        Rating = 3,
+                        Status = "Approved",
+                        CreatedAt = DateTime.Now
+                    }
+        };
+        //var reviews = await _reviewRepository.GetPendingAsync(cancellationToken);
+
+        //return reviews.Select(r => new PendingReviewDto
+        //{
+        //    Id = r.Id,
+        //    UserId = r.UserId,
+        //    UserName = r.User?.Name ?? string.Empty,
+        //    RestaurantId = r.RestaurantId,
+        //    RestaurantName = r.Restaurant?.Name ?? string.Empty,
+        //    DishId = r.DishId,
+        //    DishName = r.Dish?.Name ?? string.Empty,
+        //    Comment = r.Comment,
+        //    RatingTaste = r.RatingTaste,
+        //    RatingPortion = r.RatingPortion,
+        //    RatingValue = r.RatingValue,
+        //    IsApproved = r.IsApproved,
+        //    IsFlagged = r.IsFlagged,
+        //    CreatedAt = r.CreatedAt
+        //});
     }
 
     public async Task<bool> ApproveAsync(int reviewId, CancellationToken cancellationToken = default)

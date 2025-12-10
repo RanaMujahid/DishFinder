@@ -8,4 +8,5 @@ public class MenuItemDto
     public string Currency { get; set; } = "AED";
     public bool IsSignature { get; set; }
     public bool IsAvailable { get; set; }
+    public int RestaurantId { get; set; }
 }
